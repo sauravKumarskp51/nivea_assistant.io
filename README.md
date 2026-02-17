@@ -21,9 +21,14 @@ It combines real-time system controls, weather updates, media playback, and AI-b
   <li>🎨 Modern UI/UX</li>
 </ul>
 
+---
 
+<h3 align="center">Flow chart diagram of NIVEA Assistant</h3>
 
+<p align="center">
 
+<img width="1536" height="1024" alt="2" src="https://github.com/user-attachments/assets/9af3bb22-91b8-441b-9c41-7ffcc186b5eb" />
+</p>
 
 
 
