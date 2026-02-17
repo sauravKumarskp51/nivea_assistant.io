@@ -30,6 +30,16 @@ It combines real-time system controls, weather updates, media playback, and AI-b
 <img width="800" height="1024" alt="2" src="https://github.com/user-attachments/assets/9af3bb22-91b8-441b-9c41-7ffcc186b5eb" />
 </p>
 
+---
+
+<h3 align="center">Output of NIVEA Assistant</h3>
+
+<p align="center">
+
+![1](https://github.com/user-attachments/assets/93c62185-da44-40f0-ac4f-cc827fe35d42)
+</p>
+
+
 
 
 
