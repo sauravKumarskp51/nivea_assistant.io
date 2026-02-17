@@ -1,0 +1,15 @@
+flask
+flask-cors
+spotipy
+speechrecognition
+pyttsx3
+pyaudio
+openai
+pyperclip
+pyautogui
+selenium
+pygetwindow
+spotify
+keyboard
+pywhatkit
+sympy

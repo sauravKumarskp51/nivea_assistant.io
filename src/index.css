@@ -1,0 +1,915 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: none;
+}
+
+
+body {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  min-height: 100vh;
+  color: white;
+}
+
+:root {
+  --top-card-height: 320px; /* 👈 tweak once, affects all */
+  --bottom-card-height: 340px;
+}
+
+
+
+/* GRID LAYOUT */
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  height: 100dvh;
+  gap: 20px;
+  padding: 14px;
+}
+
+.dashboard::before {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  background: radial-gradient(
+    circle,
+    rgba(120,180,200,0.06),
+    transparent 60%
+  );
+  animation: ambient-breathe 28s ease-in-out infinite;
+  pointer-events: none;
+}
+
+
+/* =========================
+   COLUMN BASE
+========================= */
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  height: 100%;
+  min-width: 0;
+}
+
+/* Glass spacing safety */
+.column > .glass {
+  flex-shrink: 0;
+}
+
+
+/* =========================
+   COLUMN BEHAVIOR
+========================= */
+
+/* Column 1 — balance avatar + spotify */
+.column:nth-child(1) {
+  justify-content: space-between;
+}
+
+/* Column 2 — Weather + Gita */
+.column:nth-child(2) {
+  justify-content: space-between;
+}
+
+/* Column 3 — Skills centered */
+.column:nth-child(3) {
+  justify-content: center;
+}
+
+/* Column 4 — Voice full height */
+.voice-column {
+  height: 100%;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .dashboard {
+    grid-template-columns: repeat(2, 1fr);
+    height: auto;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* GLASS EFFECT */
+.glass {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.center-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 👈 key */
+  align-items: center;
+  height: 100%;
+}
+
+
+
+.right-panel {
+  display: flex;
+  align-items: flex-start;
+}
+
+.right-row {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+
+
+.voice-console {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+/* SPOTIFY CARD */
+.spotify-card {
+  padding: 22px;
+  height: var(--bottom-card-height);
+  display: flex;              /* ✅ REQUIRED */
+  flex-direction: column;     /* ✅ REQUIRED */
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.spotify-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.right-status {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.status.playing {
+  color: #00ff9c;
+  font-size: 11px;
+}
+
+.device {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+
+.spotify-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.track-section {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 18px;
+  flex-shrink: 0;
+}
+
+.track-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 18px;
+  flex-shrink: 0;
+}
+
+.cover {
+  width: 120px;
+  height: 120px;
+  border-radius: 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+
+
+
+.song {
+  font-size: 17px;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;      /* 👈 max 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+.artist {
+  margin-top: 6px;
+  font-size: 13px;
+  opacity: 0.75;
+  white-space: nowrap;        /* 👈 single line */
+  overflow: hidden;
+  text-overflow: ellipsis;    /* 👈 ... */
+  max-width: 100%;
+}
+
+
+
+.track-info h4 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.track-info p {
+  margin-top: 6px;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+
+/* CONTROLS */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-shrink: 0;
+  margin-bottom: 14px;
+}
+
+.controls button {
+  background: rgba(255,255,255,0.12);
+  border: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+}
+
+.controls .play {
+  width: 54px;
+  height: 54px;
+  font-size: 22px;
+}
+
+.controls button:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.18);
+}
+
+
+/* PROGRESS BAR */
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  margin-top: auto;
+}
+
+.progress input {
+  flex: 1;
+  height: 6px;
+  appearance: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.25);
+}
+
+
+
+
+
+/* VOICE CONSOLE */
+.user {
+  color: #00eaff;
+  margin-top: 15px;
+}
+
+.assistant {
+  margin-top: 10px;
+}
+
+.mic-status {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.listening {
+  color: #00ff9c;
+}
+
+
+
+/* AVATAR SECTION */
+
+/* AVATAR CONTAINER */
+.avatar {
+  position: relative;
+  text-align: center;
+  height: var(--top-card-height);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: avatar-breathe 12s ease-in-out infinite;
+}
+
+/* GLOW RING */
+.avatar-ring {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  z-index: 1;
+  filter: blur(26px);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* AVATAR IMAGE */
+.avatar img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 200px;
+  border-radius: 50%;
+}
+
+/* NAME */
+.avatar h2 {
+  position: relative;
+  z-index: 2;
+  color: #0b3c5d;
+  margin-top: 12px;
+  letter-spacing: 8px;
+}
+
+/* STATE TEXT */
+.avatar-state {
+  position: relative;
+  z-index: 2;
+  margin-top: 4px;
+  color: #cf84b5;
+  font-weight: 600;
+}
+
+/* 🔵 IDLE — calm breathing */
+.avatar.idle .avatar-ring {
+  background: radial-gradient(circle, #4fdcff, transparent 65%);
+  opacity: 0.35;
+  animation: idleGlow 6s ease-in-out infinite;
+}
+
+@keyframes idleGlow {
+  0% { transform: scale(0.95); opacity: 0.25; }
+  50% { transform: scale(1.05); opacity: 0.45; }
+  100% { transform: scale(0.95); opacity: 0.25; }
+}
+
+/* 🟢 LISTENING */
+.avatar.listening .avatar-ring {
+  background: radial-gradient(circle, #00ff9c, transparent 65%);
+  opacity: 0.7;
+  animation: pulse 1.4s infinite;
+  box-shadow: 0 0 40px rgba(0,255,160,0.25);
+}
+
+/* 🟣 THINKING */
+.avatar.thinking .avatar-ring {
+  background: radial-gradient(circle, #c58cff, transparent 65%);
+  opacity: 0.6;
+  animation: pulse 2.2s infinite;
+  box-shadow: 0 0 40px rgba(120,160,255,0.22);
+}
+
+/* 🟠 SPEAKING */
+.avatar.speaking .avatar-ring {
+  background: radial-gradient(circle, #ffb86c, transparent 65%);
+  opacity: 0.8;
+  animation: pulse 1s infinite;
+  ox-shadow: 0 0 50px rgba(255,180,120,0.35);
+}
+
+/* 💤 SLEEPING */
+.avatar.sleeping img {
+  opacity: 0.35;
+}
+
+.avatar.sleeping .avatar-ring {
+  opacity: 0.15;
+  animation: none;
+}
+
+/* SHARED PULSE */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.08); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 0.4; }
+}
+
+
+
+/* WEATHER CARD */
+.weather-card {
+  height: var(--top-card-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+
+.weather-card.clear {
+  background: linear-gradient(135deg, #ffb347, #ffcc33);
+}
+
+.weather-card.clouds {
+  background: linear-gradient(135deg, #6c7a89, #a3b1c6);
+}
+
+.weather-card.rain {
+  background: linear-gradient(135deg, #4b79a1, #283e51);
+}
+
+.weather-card.snow {
+  background: linear-gradient(135deg, #e6f0ff, #cfd9df);
+}
+
+
+/* WEATHER ICON ANIMATION */
+.weather-header {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.weather-icon {
+  font-size: 34px;
+}
+
+.weather-icon.animate {
+  animation: float 2.5s ease-in-out infinite;
+  text-align: center;
+}
+
+
+@keyframes sway {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
+/* WEATHER DETAILS */
+.weather-temp {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0 6px;
+}
+
+.temp {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.unit {
+  font-size: 18px;
+  margin-top: 6px;
+}
+
+.feels {
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+
+.sun-times {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0;
+  font-size: 12px;
+}
+
+.location {
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+
+/* GITA PANEL */
+
+.gita-panel {
+  width: 100%;                         /* 👈 let grid decide width */
+  height: var(--bottom-card-height);
+  margin-bottom: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;             /* vertical centering */
+  align-items: center;                 /* horizontal centering */
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+
+.gita-panel::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.12),
+    rgba(255,255,255,0.08)
+  );
+  filter: blur(18px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.krishna {
+  position: relative;
+  width: 120px;
+  margin-bottom: 6px;
+  max-width: 100%;
+  height: auto;
+
+  animation:
+    float 6s ease-in-out infinite,
+    sway 8s ease-in-out infinite;
+
+  filter:
+    drop-shadow(0 0 22px rgba(255, 215, 100, 0.55))
+    drop-shadow(0 0 45px rgba(0, 200, 255, 0.35))
+}
+
+.krishna::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 215, 120, 0.45),
+    rgba(0, 200, 255, 0.25),
+    rgba(0, 0, 0, 0) 70%
+  );
+
+  filter: blur(25px);
+  z-index: -1;
+
+  animation:
+    auraPulse 5.5s ease-in-out infinite,
+    auraRotate 18s linear infinite;
+}
+
+
+/* Divine aura behind Krishna */
+.krishna::after {
+  content: "";
+  position: absolute;
+}
+
+
+.shlok {
+  flex: 1;                             /* 👈 fills middle space */
+  display: flex;
+  align-items: center;                /* vertical center */
+  justify-content: center;             /* horizontal center */
+
+  text-align: center;
+  font-size: 17px;
+  line-height: 1.7;
+
+  padding: 6px 12px;
+  overflow: hidden;
+}
+
+
+
+.ref {
+  font-size: 14px;
+  opacity: 0.65;
+  letter-spacing: 1px;
+  margin-top: auto;
+}
+
+@keyframes auraPulse {
+  0% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+}
+
+@keyframes auraRotate {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+
+
+/* SKILL PANEL */
+
+.skill-panel {
+  height: var(--top-card-height);
+  display: flex;
+  flex-direction: column;
+  min-width: 260px;
+}
+
+
+.toggle {
+  font-size: 20px;
+}
+
+/* GRID */
+.skill-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* ⬅ better use of space */
+  gap: 12px;
+}
+
+
+/* TILE */
+
+.skill-tile {
+  all: unset;                  /* 🔥 resets weird defaults */
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 88px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  color: white;
+  text-align: center;
+  pointer-events: auto;        /* 🔥 REQUIRED */
+  position: relative;
+  z-index: 10;                 /* 🔥 ABOVE GLASS */
+  transition:
+    transform 0.15s ease,
+    background 0.2s ease;
+}
+
+.skill-tile:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.14);
+}
+
+.skill-tile:active {
+  transform: scale(0.96);
+}
+
+.skill-tile.active {
+  box-shadow:
+    0 0 20px rgba(0, 255, 180, 0.6),
+    0 0 35px rgba(0, 255, 180, 0.25);
+  animation: activePulse 2s ease-in-out infinite;
+}
+
+@keyframes activePulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+.skill-tile .icon {
+  font-size: 30px;
+  display: block;
+}
+
+.skill-tile .label {
+  font-size: 12px;
+  margin-top: 6px;
+  font-style: bold;
+  opacity: 0.85;
+}
+
+
+
+.heart-video-panel {
+  position: relative;
+  width: 100%;
+  height: var(--bottom-card-height); /* Ensure this variable is defined elsewhere */
+  border-radius: 22px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  background: #0b1f28;
+  animation: heart-beat 4.5s ease-in-out infinite;
+}
+
+/* 🎥 VIDEO ADJUSTMENTS */
+.heart-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  /* Lowering saturation here helps the overlay color take over better */
+  filter: 
+    hue-rotate(30deg) brightness(1.1) contrast(1.2) saturate(0.8);
+}
+
+/* 🌈 COLOR MATCH OVERLAY */
+.heart-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  /* Radial gradient makes the "Endless Shine" feel centered */
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 212, 255, 0.15) 0%, 
+    rgba(11, 31, 40, 0.8) 80%
+  );
+  mix-blend-mode: overlay;
+}
+
+
+/* 📴 BACKEND DEAD STATE */
+.heart-video-panel.dead .heart-video {
+  filter: grayscale(1) brightness(0.3);
+}
+
+.heart-video-panel.dead .heart-overlay {
+  background: rgba(11, 31, 40, 0.85);
+  mix-blend-mode: normal;
+}
+
+/*  VOICE CONSOLE */
+.voice-console {
+  height: 100%;
+  margin-bottom: 12px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.6s ease;
+}
+
+.presence-orb {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+.orb-core {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(120, 180, 255, 0.9),
+    rgba(30, 90, 160, 0.6)
+  );
+  animation: breathe 5s ease-in-out infinite;
+}
+
+.orb-ring {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 2px solid rgba(140, 200, 255, 0.4);
+  opacity: 0;
+}
+
+.orb-field {
+  position: absolute;
+  inset: -28px;
+  border-radius: 50%;
+  border: 1px solid rgba(120, 180, 255, 0.15);
+  animation: field-drift 12s ease-in-out infinite;
+}
+
+@keyframes field-drift {
+  0%   { transform: scale(0.98); opacity: 0.3; }
+  50%  { transform: scale(1.04); opacity: 0.5; }
+  100% { transform: scale(0.98); opacity: 0.3; }
+}
+
+
+
+
+/* 🔵 LISTENING */
+.voice-console.listening .orb-ring {
+  animation: pulse-ring 1.4s ease-out infinite;
+  opacity: 1;
+}
+
+/* 🟣 THINKING */
+.voice-console.thinking .orb-core {
+  filter: hue-rotate(25deg);
+  animation: orb-rotate 18s linear infinite;
+}
+
+.voice-console.speaking .orb-core {
+  filter: hue-rotate(-15deg) saturate(1.1);
+  animation: orb-pulse 0.9s ease-in-out infinite;
+}
+
+
+/* ANIMATIONS */
+@keyframes breathe {
+  0% { transform: scale(0.95); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(0.95); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  100% { transform: scale(1.2); opacity: 0; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg) scale(1); }
+  to { transform: rotate(360deg) scale(1.05); }
+}
+
+@keyframes speak {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+
+.voice-console.idle .orb-core {
+  animation: idle-breathe 8s ease-in-out infinite;
+}
+
+@keyframes idle-breathe {
+  0%   { transform: scale(0.98); }
+  50%  { transform: scale(1.02); }
+  100% { transform: scale(0.98); }
+}
+
+
+
