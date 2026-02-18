@@ -1,16 +1,45 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h1 align="center">NIVEA Assistant Fully Automated</h1>
 
-Currently, two official plugins are available:
+<h3>Description:</h3>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<p align="justify">
+NIVEA is a modern, voice-enabled desktop AI assistant designed to deliver an interactive and intelligent smart-dashboard experience.
+It combines real-time system controls, weather updates, media playback, and AI-based interaction in a sleek, glassmorphism-inspired interface.
+</p>
 
-## React Compiler
+<p><strong>Features</strong></p>
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+<ul style="font-weight: bold;">
+  <li>🎙️ AI Voice Assistant</li>
+  <li>🌤️ Live Weather Dashboard</li>
+  <li>🎵 Spotify Integration</li>
+  <li>🖥️ Smart App Launcher</li>
+  <li>🔆 System Controls</li>
+  <li>🧘 Spiritual / Motivational Section</li>
+  <li>❤️ Health Monitoring UI (Prototype)</li>
+  <li>🎨 Modern UI/UX</li>
+</ul>
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<h3 align="center">Flow chart diagram of NIVEA Assistant</h3>
+
+<p align="center">
+
+<img width="800" height="1024" alt="2" src="https://github.com/user-attachments/assets/9af3bb22-91b8-441b-9c41-7ffcc186b5eb" />
+</p>
+
+---
+
+<h3 align="center">Output of NIVEA Assistant</h3>
+
+<p align="center">
+
+![1](https://github.com/user-attachments/assets/93c62185-da44-40f0-ac4f-cc827fe35d42)
+</p>
+
+
+
+
+
