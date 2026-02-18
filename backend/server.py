@@ -146,8 +146,8 @@ def listen() -> str:
         return ""
 
 # ================== CONFIG ==================
-SPOTIFY_CLIENT_ID = "42a64a2a568148319ea6f376056e3bbc"
-SPOTIFY_CLIENT_SECRET = "151ccf8055bb4aaf9c6277664468a499"
+SPOTIFY_CLIENT_ID = ""
+SPOTIFY_CLIENT_SECRET = ""
 SPOTIFY_REDIRECT_URI = "http://127.0.0.1:8888/callback"
 SPOTIFY_SCOPE = "user-modify-playback-state user-read-playback-state"
 

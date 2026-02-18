@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API_KEY = "d888c2ef950c26d142d75843687c98cf";
+const API_KEY = "";
 
 export default function WeatherCard() {
   const [weather, setWeather] = useState(null);
